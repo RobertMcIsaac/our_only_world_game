@@ -4,8 +4,8 @@ import pygame
 SCREEN_WIDTH, SCREEN_HEIGHT = 800, 600
 
 # Load button images
-tick = pygame.image.load("game/assets/tick.png")
-cross = pygame.image.load("game/assets/cross.png")
+tick = pygame.image.load("game/assets/images/tick.png")
+cross = pygame.image.load("game/assets/images/cross.png")
 
 # Resize buttons
 tick = pygame.transform.scale(tick, (80, 80))
