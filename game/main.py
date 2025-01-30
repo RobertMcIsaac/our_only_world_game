@@ -30,24 +30,36 @@ fact_shown = False  # Track if a fact is being displayed
 # Font for displaying facts
 font = pygame.font.Font(None, 28)  # Adjust font size as needed
 
-# Fact font color
+# Fact font color and position
 FACT_COLOR = (0, 0, 0)  # Light blue
+FACT_Y_POSITION = 20  # Near the top
 
 def show_fact(screen, message):
-    """Displays a multi-line fact message at the bottom of the screen."""
-    y_offset = SCREEN_HEIGHT - 120  # Position above the bottom
-    for line in message.split("\n"):  # Split fact into multiple lines
-        text_surface = font.render(line, True, FACT_COLOR)  # Use FACT_COLOR
-        screen.blit(text_surface, (50, y_offset))
-        y_offset += 30  # Move down for next line
+    """Displays a multi-line fact message at the top center of the screen."""
+    lines = message.split("\n")  # Split fact into multiple lines
+    y_offset = FACT_Y_POSITION  # Start near the top
+
+    for line in lines:
+        text_surface = font.render(line, True, FACT_COLOR)
+        text_width = text_surface.get_width()
+        x_position = (SCREEN_WIDTH - text_width) // 2  # Center horizontally
+        screen.blit(text_surface, (x_position, y_offset))
+        y_offset += 30  # Move down for the next line
+
 
 # Game loop
 running = True
 while running:
     screen.blit(background, (0, 0))  # Draw background
     screen.blit(turtle, (turtle_x, turtle_y))  # Draw turtle
-    current_item.draw(screen, ((SCREEN_WIDTH - current_item.image.get_width()) // 2, 
-                                (SCREEN_HEIGHT - current_item.image.get_height()) // 2 - 50))  # Center item
+    # Adjust Y-position to move item further down
+    ITEM_Y_OFFSET = 60  # Increase this value to move it further down
+
+    # Draw the current item lower on the screen
+    current_item.draw(screen, (
+        (SCREEN_WIDTH - current_item.image.get_width()) // 2,
+        ((SCREEN_HEIGHT - current_item.image.get_height()) // 2) + ITEM_Y_OFFSET  # Move item down
+    ))
     draw_buttons(screen)  # Draw tick and cross buttons
 
     # Display fact if available

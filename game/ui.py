@@ -11,9 +11,11 @@ cross = pygame.image.load("game/assets/images/cross.png")
 tick = pygame.transform.scale(tick, (80, 80))
 cross = pygame.transform.scale(cross, (80, 80))
 
-# Button positions (below the item)
-tick_rect = tick.get_rect(center=(SCREEN_WIDTH // 2 - 100, SCREEN_HEIGHT // 2 + 100))
-cross_rect = cross.get_rect(center=(SCREEN_WIDTH // 2 + 100, SCREEN_HEIGHT // 2 + 100))
+# New button positions (above the item)
+BUTTON_Y_POSITION = (SCREEN_HEIGHT // 2) - 120  # Adjust to be above the item
+
+tick_rect = tick.get_rect(center=(SCREEN_WIDTH // 2 - 100, BUTTON_Y_POSITION))
+cross_rect = cross.get_rect(center=(SCREEN_WIDTH // 2 + 100, BUTTON_Y_POSITION))
 
 def draw_buttons(screen):
     """Draw tick and cross buttons on the screen."""
@@ -25,14 +27,14 @@ def handle_click(event, current_item):
     if event.type == pygame.MOUSEBUTTONDOWN:
         if tick_rect.collidepoint(event.pos):  # Player clicked tick
             if current_item.belongs_in_sea:
-                return f"✅ Correct! {current_item.name} belongs in the ocean.\n{current_item.fact}"
+                return f"Correct! {current_item.name} belongs in the ocean.\n{current_item.fact}"
             else:
-                return f"❌ Wrong! {current_item.name} should not be in the ocean.\n{current_item.fact}"
+                return f"Wrong! {current_item.name} should not be in the ocean.\n{current_item.fact}"
 
         elif cross_rect.collidepoint(event.pos):  # Player clicked cross
             if not current_item.belongs_in_sea:
-                return f"✅ Correct! {current_item.name} does not belong in the ocean.\n{current_item.fact}"
+                return f"Correct! {current_item.name} does not belong in the ocean.\n{current_item.fact}"
             else:
-                return f"❌ Wrong! {current_item.name} is part of the ecosystem.\n{current_item.fact}"
+                return f"Wrong! {current_item.name} is part of the ecosystem.\n{current_item.fact}"
 
     return None  # If no button was clicked
