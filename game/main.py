@@ -16,8 +16,9 @@ background = pygame.image.load("game/assets/images/background_image.jpg")
 background = pygame.transform.scale(background, (SCREEN_WIDTH, SCREEN_HEIGHT))
 
 # Load turtle character
-turtle = pygame.image.load("game/assets/images/shelley.png")
+turtle = pygame.image.load("game/assets/images/shelley_front.png")
 turtle = pygame.transform.scale(turtle, (100, 100))
+
 
 # Turtle position
 turtle_x = 10

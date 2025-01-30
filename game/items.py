@@ -9,6 +9,7 @@ class Item:
         self.image = pygame.image.load(image)  
         self.belongs_in_sea = belongs_in_sea  # True = should be in the sea, False = should not
         self.fact = fact  
+        self.image = pygame.transform.scale(self.image, (100, 100))
 
     def draw(self, screen, position): # Where to position item image
         screen.blit(self.image, position)  
