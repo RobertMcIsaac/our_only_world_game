@@ -51,7 +51,7 @@ while running:
                 selected_fact = ""  # Clear fact
                 fact_shown = False  # Allow next click
             else:  # If no fact is displayed, handle game logic
-                selected_fact = handle_click(event, current_item, lambda fact: fact)
+                selected_fact = handle_click(event, current_item)
 
     pygame.display.flip()
 

@@ -20,18 +20,19 @@ def draw_buttons(screen):
     screen.blit(tick, tick_rect)
     screen.blit(cross, cross_rect)
 
-def handle_click(event, current_item, show_fact):
-    """Handles button clicks and determines if the player was correct."""
+def handle_click(event, current_item):
+    """Handles button clicks and returns the item's fact."""
     if event.type == pygame.MOUSEBUTTONDOWN:
         if tick_rect.collidepoint(event.pos):  # Player clicked tick
-            if current_item.category == "sea_life":
-                show_fact(f"✅ Correct! {current_item.category} belongs in the ocean.")
+            if current_item.belongs_in_sea:
+                return f"✅ Correct! {current_item.name} belongs in the ocean.\n{current_item.fact}"
             else:
-                show_fact(f"❌ Wrong! {current_item.category} should not be in the ocean.")
+                return f"❌ Wrong! {current_item.name} should not be in the ocean.\n{current_item.fact}"
 
         elif cross_rect.collidepoint(event.pos):  # Player clicked cross
-            if current_item.category == "rubbish":
-                show_fact(f"✅ Correct! {current_item.category} does not belong in the ocean.")
+            if not current_item.belongs_in_sea:
+                return f"✅ Correct! {current_item.name} does not belong in the ocean.\n{current_item.fact}"
             else:
-                show_fact(f"❌ Wrong! {current_item.category} is part of the ecosystem.")
+                return f"❌ Wrong! {current_item.name} is part of the ecosystem.\n{current_item.fact}"
 
+    return None  # If no button was clicked
